@@ -1,0 +1,14 @@
+//
+//  BookRepository.swift
+//  LelexiaApp
+//
+//  Created by Lidiane Gomes Barbosa on 07/12/24.
+//
+
+import Foundation
+
+protocol BookRepository {
+    func getBooks() async throws -> [Book]
+    func addBook(_ book: Book) async throws
+    func deleteBook(_ book: Book) async throws
+}
