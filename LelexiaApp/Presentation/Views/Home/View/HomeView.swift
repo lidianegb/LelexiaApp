@@ -10,21 +10,28 @@ import SwiftUI
 struct HomeView: View {
     @Environment(\.coordinator) var coordinator: NavigationCoordinator
     @Bindable var viewModel: HomeViewModel
-    var htmlString = "<h1>Go to <font color=\"purple\">list stories view</font></h1>"
-    @State var attributedString: AttributedString?
+   
     var body: some View {
-        VStack {
-            if let attributedString {
-                Button {
+        ZStack {
+            BackgroundHomeView()
+            VStack {
+                Image("logoname")
+                    .resizable()
+                    .scaledToFit()
+                Spacer()
+                CardButtonView(image: "books") {
                     coordinator.navigate(to: .bookList)
-                } label: {
-                    Text(attributedString)
+                }
+                HStack(spacing: Metrics.medium) {
+                    CardButtonView(image: "wordsGame") {
+                        // go to words game
+                    }
+                    CardButtonView(image: "memoryGame") {
+                        // go to memory game
+                    }
                 }
             }
-        } .onAppear {
-            DispatchQueue.main.async {
-                attributedString = htmlString.htmlToAttributed
-            }
+            .padding([.horizontal, .bottom], Metrics.medium)
         }
     }
 }
