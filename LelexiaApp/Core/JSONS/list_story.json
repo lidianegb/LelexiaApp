@@ -1,0 +1,227 @@
+[
+    {
+        "titulo": "O coelho e a cenoura perdida",
+        "capa": "h1-cena1",
+        "bloqueado": false,
+        "paragrafos": [
+            {
+                "texto": "Totó era um coelho que vivia em uma linda horta cheia de cenouras. Um dia, ele plantou uma cenoura especial e esperou pacientemente que ela crescesse.",
+                "imagem": "h1-cena1"
+            },
+            {
+                "texto": "Quando finalmente ficou pronta, ele ficou todo animado para colhê-la. Mas, para sua surpresa, a cenoura tinha sumido!",
+                "imagem": "h1-cena2"
+            },
+            {
+                "texto": "Desesperado, Toto começou a procurar por todos os cantos do jardim: embaixo das folhas, dentro dos buracos, e até na casinha do passarinho.",
+                "imagem": "h1-cena3"
+            },
+            {
+                "texto": "Cansado, ele sentou-se no chão e, ao colocar a mão no bolso do avental, sentiu algo macio. Lá estava sua cenoura! Toto riu de si mesmo e prometeu ser mais cuidadoso da próxima vez.",
+                "imagem": "h1-cena4"
+            }
+        ],
+        "palavras": [
+            {
+                "palavra": "coelho",
+                "silabas": ["co", "e", "lho"],
+                "imagem": "coelho-img"
+            },
+            {
+                "palavra": "cenoura",
+                "silabas": ["ce", "nou", "ra"],
+                "imagem": "cenoura-img"
+            },
+            {
+                "palavra": "jardim",
+                "silabas": ["jar", "dim"],
+                "imagem": "jardim-img"
+            },
+            {
+                "palavra": "avental",
+                "silabas": ["a", "ven", "tal"],
+                "imagem": "avental-img"
+            },
+            {
+                "palavra": "passarinho",
+                "silabas": ["pas", "sa", "ri", "nho"],
+                "imagem": "passarinho-img"
+            }
+        ]
+    },
+    {
+        "titulo": "A formiga apressada",
+        "capa": "h2-cena1",
+        "bloqueado": true,
+        "paragrafos": [
+            {
+                "texto": "Tina era a formiga mais apressada de todo o formigueiro. Sempre quis ser a primeira a terminar as tarefas e mal parava para descansar.",
+                "imagem": "h2-cena1"
+            },
+            {
+                "texto": "Um dia, recebeu a missão de levar uma folha bem grande para o formigueiro. Sem esperar ajuda, Tina começou a carregar a folha sozinha.",
+                "imagem": "h2-cena2"
+            },
+            {
+                "texto": "Mas, no meio do caminho, tropeçou em uma pedrinha e caiu de barriga para cima. As outras formigas vieram correndo ajudar, mas Tina insistia em tentar sozinha.",
+                "imagem": "h2-cena3"
+            },
+            {
+                "texto": "Quando finalmente aceitou a ajuda das amigas, perceberam que, juntas, a tarefa era bem mais rápida. Tina aprendeu que trabalhar em equipe era muito mais fácil e divertido.",
+                "imagem": "h2-cena4"
+            }
+        ],
+        "palavras": [
+            {
+                "palavra": "formiga",
+                "silabas": ["for", "mi", "ga"],
+                "imagem": "formiga-img"
+            },
+            {
+                "palavra": "folha",
+                "silabas": ["fo", "lha"],
+                "imagem": "folha-img"
+            },
+            {
+                "palavra": "pedra",
+                "silabas": ["pe", "dra"],
+                "imagem": "pedra-img"
+            },
+            {
+                "palavra": "arvore",
+                "silabas": ["ar", "vo", "re"],
+                "imagem": "arvore-img"
+            }
+        ]
+    },
+    {
+        "titulo": "O gato curioso",
+        "capa": "h3-cena1",
+        "bloqueado": true,
+        "paragrafos": [
+            {
+                "texto": "Léo era um gatinho muito curioso, sempre atrás de algo novo para explorar. Um dia, enquanto brincava no jardim, viu uma borboleta colorida voando entre as flores.",
+                "imagem": "h3-cena1"
+            },
+            {
+                "texto": "Fascinado, Léo a seguiu, pulando entre os canteiros e se escondendo atrás das plantas. A borboleta pousou em uma grande pedra, e Léo, com cuidado, tentou agarrá-la.",
+                "imagem": "h3-cena2"
+            },
+            {
+                "texto": "Mas, assim que se aproximou, ela voou para o alto, desaparecendo no céu. O gatinho, frustrado, percebeu que algumas coisas são feitas apenas para serem admiradas, e não para serem capturadas.",
+                "imagem": "h3-cena3"
+            },
+            {
+                "texto": "Desde então, ele passou a observar mais e a correr menos atrás das borboletas.",
+                "imagem": "h3-cena4"
+            }
+        ],
+        "palavras": [
+            {
+                "palavra": "gato",
+                "silabas": ["ga", "to"],
+                "imagem": "gato-img"
+            },
+            {
+                "palavra": "borboleta",
+                "silabas": ["bor", "bo", "le", "ta"],
+                "imagem": "borboleta-img"
+            },
+            {
+                "palavra": "pedra",
+                "silabas": ["pe", "dra"],
+                "imagem": "pedra-img"
+            },
+            {
+                "palavra": "jardim",
+                "silabas": ["jar", "dim"],
+                "imagem": "jardim-img"
+            }
+        ]
+    },
+    {
+        "titulo": "A estrela e a coruja",
+        "capa": "h4-cena1",
+        "bloqueado": true,
+        "paragrafos": [
+            {
+                "texto": "Luna, a pequena coruja, tinha um grande sonho: tocar uma estrela. Todas as noites, ela olhava para o céu e ficava encantada com o brilho das estrelas.",
+                "imagem": "h4-cena1"
+            },
+            {
+                "texto": "Um dia, decidiu que tentaria voar até uma delas. Ela bateu suas asas com força, subindo cada vez mais alto, mas quanto mais perto parecia estar, mais longe a estrela ficava.",
+                "imagem": "h4-cena2"
+            },
+            {
+                "texto": "Cansada, Luna pousou em um galho e, de repente, ouviu uma voz suave. Era a estrela dizendo: “Eu estou aqui para brilhar e guiar você, não para ser tocada.”",
+                "imagem": "h4-cena3"
+            },
+            {
+                "texto": "Luna sorriu e entendeu que às vezes o brilho das coisas está na distância, e não na posse.",
+                "imagem": "h4-cena4"
+            }
+        ],
+        "palavras": [
+            {
+                "palavra": "coruja",
+                "silabas": ["co", "ru", "ja"],
+                "imagem": "coruja-img"
+            },
+            {
+                "palavra": "estrela",
+                "silabas": ["es", "tre", "la"],
+                "imagem": "estrela-img"
+            },
+            {
+                "palavra": "asa",
+                "silabas": ["a", "sa"],
+                "imagem": "asa-img"
+            },
+            {
+                "palavra": "galho",
+                "silabas": ["ga", "lho"],
+                "imagem": "galho-img"
+            }
+        ]
+    },
+    {
+        "titulo": "O peixinho corajoso",
+        "capa": "h5-cena1",
+        "bloqueado": true,
+        "paragrafos": [
+            {
+                "texto": "Dori era um peixinho que morava em um grande coral colorido. Ele tinha medo de nadar muito longe, achando que o mundo além do coral era perigoso.",
+                "imagem": "h5-cena1"
+            },
+            {
+                "texto": "Um dia, uma correnteza forte o pegou de surpresa e o levou para longe do seu lar. Assustado, Dori tentou nadar contra a corrente, mas não conseguiu voltar.",
+                "imagem": "h5-cena2"
+            },
+            {
+                "texto": "Ele se viu em um lugar completamente novo, cheio de peixes diferentes e plantas marinhas que nunca tinha visto antes. Com o tempo, Dori percebeu que aquele lugar era seguro e bonito.",
+                "imagem": "h5-cena3"
+            },
+            {
+                "texto": "Quando finalmente conseguiu voltar ao seu coral, ele já não tinha mais medo de explorar novos lugares.",
+                "imagem": "h5-cena4"
+            }
+        ],
+        "palavras": [
+            {
+                "palavra": "peixe",
+                "silabas": ["pei", "xe"],
+                "imagem": "peixe-img"
+            },
+            {
+                "palavra": "coral",
+                "silabas": ["co", "ral"],
+                "imagem": "coral-img"
+            },
+            {
+                "palavra": "mar",
+                "silabas": ["mar"],
+                "imagem": "mar-img"
+            }
+        ]
+    }
+]

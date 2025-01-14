@@ -29,4 +29,8 @@ class BookRepositoryImpl: BookRepository {
     func deleteBook(_ book: Book) async throws {
         try await dataSource.deleteBook(BookDataModel(from: book))
     }
+    
+    func unlockBook(_ book: Book) async throws {
+        try await dataSource.unloackBook(BookDataModel(from: book))
+    }
 }

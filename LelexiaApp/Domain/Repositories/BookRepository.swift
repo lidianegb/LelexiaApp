@@ -10,5 +10,6 @@ import Foundation
 protocol BookRepository {
     func getBooks() async throws -> [Book]
     func addBook(_ book: Book) async throws
+    func unlockBook(_ book: Book) async throws
     func deleteBook(_ book: Book) async throws
 }

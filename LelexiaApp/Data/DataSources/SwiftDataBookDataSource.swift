@@ -25,20 +25,49 @@ class SwiftDataBookDataSource {
         do {
             let descriptor = FetchDescriptor<BookDataModel>()
             let bookDataModels = try context.fetch(descriptor)
-            return bookDataModels
+            
+            if bookDataModels.isEmpty {
+                let localBooks = getBooksFromLocal()
+                localBooks.forEach {
+                    do {
+                        try addBook($0)
+                    } catch {
+                        
+                    }
+                }
+                return localBooks
+            } else {
+                return bookDataModels
+            }
+           
         } catch {
-            print("Error fetching books: \(error)")
+            print("Error loading books: \(error)")
             return []
         }
     }
     
+    func getBooksFromLocal() -> [BookDataModel] {
+        guard let url = Bundle.main.url(forResource: "list_story", withExtension: "json"),
+              let data = try? Data(contentsOf: url) else { return [] }
+        let decoder = JSONDecoder()
+          
+        if let decodedData = try? decoder.decode([DecodableBook].self, from: data) {
+            return decodedData.map { BookDataModel(from: $0 )}
+        }
+        return []
+    }
     
-    func addBook(_ bookDataModel: BookDataModel) async throws {
+    func addBook(_ bookDataModel: BookDataModel) throws {
         context.insert(bookDataModel)
         try context.save()
     }
     
-    func deleteBook(_ bookDataModel: BookDataModel) async throws {
+    func unloackBook(_ bookDataModel: BookDataModel) throws {
+        bookDataModel.locked = false
+        try context.save()
+    }
+    
+    func deleteBook(_ bookDataModel: BookDataModel) throws {
         let bookDataModelID = bookDataModel.id
         
         let descriptor = FetchDescriptor<BookDataModel>(

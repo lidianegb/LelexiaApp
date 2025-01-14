@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "cenoura-img.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
