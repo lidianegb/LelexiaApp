@@ -14,6 +14,7 @@ class BookDataModel {
     var title: String
     var cover: String
     var locked: Bool
+    var backgroundColor: String
     var paragraphs: [ParagraphDataModel]
     var selectedWords: [WordDataModel]
 
@@ -23,6 +24,7 @@ class BookDataModel {
         self.title = book.title
         self.cover = book.cover
         self.locked = book.locked
+        self.backgroundColor = book.backgroundColor
         self.paragraphs = book.paragraphs.map { ParagraphDataModel(from: $0) }
         self.selectedWords = book.selectedWords.map { WordDataModel(from: $0) }
     }
@@ -33,6 +35,7 @@ class BookDataModel {
         self.title = book.title
         self.cover = book.cover
         self.locked = book.locked
+        self.backgroundColor = book.backgroundColor
         self.paragraphs = book.paragraphs.map { ParagraphDataModel(from: $0) }
         self.selectedWords = book.selectedWords.map { WordDataModel(from: $0) }
     }
@@ -44,6 +47,7 @@ class BookDataModel {
             title: title,
             cover: cover,
             locked: locked,
+            backgroundColor: backgroundColor,
             paragraphs: paragraphs.map { $0.mapToDomain()},
             selectedWords: selectedWords.map { $0.mapToDomain()}
         )

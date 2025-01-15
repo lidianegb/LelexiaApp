@@ -9,8 +9,12 @@ import Foundation
 
 @MainActor
 enum BookDetailViewFactory {
+    static private let dataSource = SwiftDataBookDataSource.shared
+    static private let repository = BookRepositoryImpl(dataSource: dataSource)
+    static private let useCases = BookUseCases(repository: repository)
+   
     static func create(id: UUID) -> BookDetailView {
-        let viewModel = BookDetailViewModel()
+        let viewModel = BookDetailViewModel(bookUseCases: useCases, bookID: id)
         return BookDetailView(viewModel: viewModel)
     }
 }

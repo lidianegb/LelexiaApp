@@ -22,6 +22,10 @@ class BookRepositoryImpl: BookRepository {
         return bookDataModels.map { $0.mapToDomain() }
     }
 
+    func getBook(from id: UUID) async throws -> Book? {
+        let bookDataModel = try await dataSource.getBook(from: id)
+        return bookDataModel.map { $0.mapToDomain() }
+    }
     func addBook(_ book: Book) async throws {
         try await dataSource.addBook(BookDataModel(from: book))
     }

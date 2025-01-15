@@ -12,98 +12,38 @@ struct BookListView: View {
     
     @Bindable var viewModel: BookListViewModel
     @Environment(\.coordinator) var coordinator: NavigationCoordinator
-    
-    // State to manage showing the add book sheet
-    @State private var isPresentingAddBookSheet = false
-    
+
     var body: some View {
-        List {
-            ForEach(viewModel.books, id: \.id) { book in
-                Text(book.title)
+        ZStack {
+            Image("book-list-background")
+                .resizable()
+                .ignoresSafeArea(.all)
+            BookListContentView(books: viewModel.books) { id in
+                coordinator.navigate(to: .bookDetail(id: id))
             }
-            .onDelete(perform: deleteBookFromTheList)
-            .onTapGesture {
-                coordinator.navigate(to: .bookDetail(id: UUID()))
-            }
-        }
-        .navigationTitle("Book List")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    coordinator.presentSheet(.addBook)
-                    isPresentingAddBookSheet = true
-                }) {
-                    Image(systemName: "plus")
-                }
-            }
-        }
-        .sheet(isPresented: $isPresentingAddBookSheet) {
-            BookListViewFactory.createAddBook()
+                .shadow(color: Color.black.opacity(0.25), radius: 10, x: 0, y: 6)
         }
         .task {
             await viewModel.loadBooks()
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                Button {
+                RoundedButtonView(image: "voltar") {
                     coordinator.goBack()
-                } label: {
-                    Text("Voltar")
                 }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Histórias")
+                    .font(.openDyslexic(size: Metrics.large))
+                    .foregroundStyle(Color.greenText)
             }
         }
         .navigationBarBackButtonHidden(true)
     }
-    
-    // Separate function to handle deletion
-    private func deleteBookFromTheList(at offsets: IndexSet) {
-        offsets.forEach { index in
-            let book = viewModel.books[index]
-            Task {
-                await viewModel.deleteBook(book)
-            }
-        }
-    }
 }
 
-// Separate view for adding a new book
-struct AddBookSheet: View {
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.coordinator) var coordinator: NavigationCoordinator
-    @Bindable var viewModel: BookListViewModel
-    
-    // State properties to hold book details
-    @State private var title = ""
-    @State private var author = ""
-    @State private var publishedDate = Date()
-    
-    var body: some View {
-        NavigationStack {
-            Form {
-                TextField("Title", text: $title)
-                TextField("Author", text: $author)
-                DatePicker("Published Date", selection: $publishedDate, displayedComponents: .date)
-            }
-            .navigationTitle("Add New Book")
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        Task {
-                            // Create a new book with user input
-                            let newBook = Book(id: UUID(), title: title, author: author, publishedDate: publishedDate)
-                            await viewModel.addBook(newBook)
-                            dismiss() // Close the sheet
-                            coordinator.dismissSheet()
-                        }
-                    }
-                }
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss() // Close the sheet without saving
-                        coordinator.dismissSheet()
-                    }
-                }
-            }
-        }
-    }
+#Preview {
+    BookListViewFactory.create()
 }

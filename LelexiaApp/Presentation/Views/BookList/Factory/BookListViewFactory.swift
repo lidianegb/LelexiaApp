@@ -17,8 +17,4 @@ enum BookListViewFactory {
     static func create() -> BookListView {
         return BookListView(viewModel: viewModel)
     }
-    
-    static func createAddBook() -> AddBookSheet {
-        return AddBookSheet(viewModel: viewModel)
-    }
 }

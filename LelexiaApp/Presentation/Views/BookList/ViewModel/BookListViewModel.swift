@@ -21,32 +21,11 @@ class BookListViewModel {
         self.bookUseCases = bookUseCases
     }
 
-    // Load all books
     func loadBooks() async {
         do {
             books = try await bookUseCases.fetchBooks()
         } catch {
             print("Error loading books: \(error)")
-        }
-    }
-
-    // Add a new book and reload
-    func addBook(_ book: Book) async {
-        do {
-            try await bookUseCases.addBook(book)
-            await loadBooks()
-        } catch {
-            print("Error adding book: \(error)")
-        }
-    }
-
-    // Delete a book and reload
-    func deleteBook(_ book: Book) async {
-        do {
-            try await bookUseCases.deleteBook(book)
-            await loadBooks()
-        } catch {
-            print("Error deleting book: \(error)")
         }
     }
 }

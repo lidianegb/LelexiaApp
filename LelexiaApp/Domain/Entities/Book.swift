@@ -12,6 +12,7 @@ struct Book: Identifiable {
     var title: String
     var cover: String
     var locked: Bool
+    var backgroundColor: String
     var paragraphs: [Paragraph]
     var selectedWords: [Word]
 }
@@ -20,6 +21,7 @@ struct DecodableBook: Codable {
     var title: String
     var cover: String
     var locked: Bool
+    var backgroundColor: String
     var paragraphs: [DecodableParagraph]
     var selectedWords: [DecodableWord]
     
@@ -27,6 +29,7 @@ struct DecodableBook: Codable {
         case title = "titulo"
         case cover = "capa"
         case locked = "bloqueado"
+        case backgroundColor = "corFundo"
         case paragraphs = "paragrafos"
         case selectedWords = "palavras"
     }

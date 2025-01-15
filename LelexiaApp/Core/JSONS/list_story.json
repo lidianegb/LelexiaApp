@@ -3,6 +3,7 @@
         "titulo": "O coelho e a cenoura perdida",
         "capa": "h1-cena1",
         "bloqueado": false,
+        "corFundo": "#81B8CD",
         "paragrafos": [
             {
                 "texto": "Totó era um coelho que vivia em uma linda horta cheia de cenouras. Um dia, ele plantou uma cenoura especial e esperou pacientemente que ela crescesse.",
@@ -53,6 +54,7 @@
         "titulo": "A formiga apressada",
         "capa": "h2-cena1",
         "bloqueado": true,
+        "corFundo": "#5ED3B4",
         "paragrafos": [
             {
                 "texto": "Tina era a formiga mais apressada de todo o formigueiro. Sempre quis ser a primeira a terminar as tarefas e mal parava para descansar.",
@@ -98,6 +100,7 @@
         "titulo": "O gato curioso",
         "capa": "h3-cena1",
         "bloqueado": true,
+        "corFundo": "#FCFF99",
         "paragrafos": [
             {
                 "texto": "Léo era um gatinho muito curioso, sempre atrás de algo novo para explorar. Um dia, enquanto brincava no jardim, viu uma borboleta colorida voando entre as flores.",
@@ -143,6 +146,7 @@
         "titulo": "A estrela e a coruja",
         "capa": "h4-cena1",
         "bloqueado": true,
+        "corFundo": "#ADA9DC",
         "paragrafos": [
             {
                 "texto": "Luna, a pequena coruja, tinha um grande sonho: tocar uma estrela. Todas as noites, ela olhava para o céu e ficava encantada com o brilho das estrelas.",
@@ -188,6 +192,7 @@
         "titulo": "O peixinho corajoso",
         "capa": "h5-cena1",
         "bloqueado": true,
+        "corFundo": "#96D2FB",
         "paragrafos": [
             {
                 "texto": "Dori era um peixinho que morava em um grande coral colorido. Ele tinha medo de nadar muito longe, achando que o mundo além do coral era perigoso.",

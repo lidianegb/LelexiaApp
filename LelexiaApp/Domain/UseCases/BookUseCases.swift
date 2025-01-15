@@ -19,6 +19,10 @@ struct BookUseCases {
         return try await repository.getBooks()
     }
 
+    func fetchBook(from id: UUID) async throws -> Book? {
+        return try await repository.getBook(from: id)
+    }
+    
     func addBook(_ book: Book) async throws {
         try await repository.addBook(book)
     }

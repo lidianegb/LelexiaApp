@@ -46,6 +46,14 @@ class SwiftDataBookDataSource {
         }
     }
     
+    func getBook(from id: UUID) async throws -> BookDataModel? {
+        let descriptor = FetchDescriptor<BookDataModel>(
+            predicate: #Predicate { $0.id == id }
+        )
+        
+        return try context.fetch(descriptor).first
+    }
+    
     func getBooksFromLocal() -> [BookDataModel] {
         guard let url = Bundle.main.url(forResource: "list_story", withExtension: "json"),
               let data = try? Data(contentsOf: url) else { return [] }

@@ -10,10 +10,16 @@ import SwiftUI
 struct BookDetailView: View {
     @Bindable var viewModel: BookDetailViewModel
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            if let book = viewModel.book {
+                Text(book.title)
+            }
+        }.task {
+            await viewModel.fetchData()
+        }
     }
 }
 
 #Preview {
-    BookDetailView(viewModel: BookDetailViewModel())
+    BookDetailViewFactory.create(id: UUID())
 }
