@@ -36,7 +36,7 @@ struct BookListContentView: View {
 }
 
 #Preview {
-    var books: [Book] = [
+    let books: [Book] = [
         Book(id: UUID(), title: "O coelho e a cenoura perdida", cover:"h1-cena1", locked: false, backgroundColor: "#81B8CD", paragraphs: [], selectedWords: []
             ),
         Book(id: UUID(), title: "A formiga apressada", cover:"h2-cena1", locked: true, backgroundColor: "#5ED3B4", paragraphs: [], selectedWords: []

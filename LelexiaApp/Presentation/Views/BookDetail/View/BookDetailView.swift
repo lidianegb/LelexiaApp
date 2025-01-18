@@ -9,14 +9,107 @@ import SwiftUI
 
 struct BookDetailView: View {
     @Bindable var viewModel: BookDetailViewModel
+    @Environment(\.coordinator) var coordinator: NavigationCoordinator
+    
+    @State private var isReading: Bool = false
+    @State private var continueReading: Bool = false
+    @State private var currentPage = 0
+    
     var body: some View {
-        VStack {
-            if let book = viewModel.book {
-                Text(book.title)
-            }
-        }.task {
-            await viewModel.fetchData()
+        ZStack {
+            Image("book-list-background")
+                .resizable()
+                .overlay {
+                    Color.white.opacity(0.6)
+                }
+                .ignoresSafeArea(.all)
+            GeometryReader { _ in
+                VStack(spacing: Metrics.medium) {
+                    HStack(spacing: Metrics.little) {
+                        RoundedButtonView(image: "voltar") {
+                            coordinator.goBack()
+                        }
+                        Spacer()
+                        Text(viewModel.book?.title ?? "")
+                            .font(.openDyslexic(size: Metrics.medium))
+                            .foregroundStyle(Color.greenText)
+                        Spacer()
+                        HStack(spacing: Metrics.nano) {
+                            RoundedButtonView(image: "font-size") {
+                                // change font size
+                            }
+                            RoundedButtonView(image: isReading ? "speaker.wave.2.fill" : "speaker.slash.fill", fromSystem: true) {
+                                
+                                switch viewModel.readingStatus {
+                                    case .playing:
+                                        Task {
+                                            viewModel.pauseReading()
+                                        }
+                                    case .paused, .stopped:
+                                        Task {
+                                            viewModel.playReading()
+                                        }
+                                }
+                                isReading.toggle()
+                                continueReading = isReading
+                                viewModel.readingStatus = isReading ? .playing : .paused
+                            }
+                        }
+                    } .frame(maxWidth: .infinity)
+                    
+                    if let book = viewModel.book {
+                        TabView(selection: $currentPage) {
+                            ForEach(0..<book.paragraphs.count, id: \.self) { index in
+                                if let paragraph = book.getParagraph(by: index) {
+                                    BookDetailLandscapeView(
+                                        image: paragraph.image,
+                                        text: $viewModel.pageTextAttributed
+                                    )
+                                    .tag(index)
+                                    .animation(.easeInOut, value: currentPage)
+                                }
+                            }
+                        }
+                        .onChange(of: currentPage) { (_, newPage) in
+                            viewModel.updatePage(newPage)
+                            viewModel.stopReading()
+                            continueReading = isReading
+                            isReading = false
+                            
+                            if continueReading {
+                                viewModel.playReading()
+                                isReading = true
+                            }
+                        }
+                        .tabViewStyle(.page(indexDisplayMode: .always))
+                        .indexViewStyle(.page(backgroundDisplayMode: .never))
+                        .frame(maxWidth: .infinity)
+                        
+                        HStack {
+                            ForEach(0..<book.paragraphs.count, id: \.self) { index in
+                                Circle()
+                                    .fill(index == currentPage ? Color.red : Color.gray)
+                                    .frame(width: 10, height: 10)
+                                    .animation(.easeInOut, value: currentPage)
+                                    .onTapGesture {
+                                        currentPage = index
+                                    }
+                            }
+                        }
+                        .padding()
+                    }
+                }
+            }.padding(Metrics.small)
         }
+        .task {
+            await viewModel.fetchData()
+        } .onAppear {
+            AppDelegate.orientationLock = .landscapeRight
+        }
+        .onDisappear {
+            AppDelegate.orientationLock = .all
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

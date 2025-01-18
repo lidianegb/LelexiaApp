@@ -9,15 +9,18 @@ import Foundation
 
 struct Paragraph: Identifiable {
     let id: UUID
+    let index: Int
     let paragraph: String
     let image: String?
 }
 
 struct DecodableParagraph: Codable {
+    let index: Int
     let paragraph: String
     let image: String?
     
     enum CodingKeys: String, CodingKey {
+        case index
         case paragraph = "texto"
         case image = "imagem"
     }

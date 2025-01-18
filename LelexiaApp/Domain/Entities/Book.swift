@@ -15,6 +15,10 @@ struct Book: Identifiable {
     var backgroundColor: String
     var paragraphs: [Paragraph]
     var selectedWords: [Word]
+    
+    func getParagraph(by index: Int) -> Paragraph? {
+        return paragraphs.filter { $0.index == index }.first
+    }
 }
 
 struct DecodableBook: Codable {

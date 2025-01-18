@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct LelexiaApp: App {
     @ObservedObject var coordinator = NavigationCoordinator()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
@@ -22,5 +23,13 @@ struct LelexiaApp: App {
             }
         }
         .environment(\.coordinator, coordinator)
+    }
+}
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    static var orientationLock: UIInterfaceOrientationMask = .all
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return AppDelegate.orientationLock
     }
 }

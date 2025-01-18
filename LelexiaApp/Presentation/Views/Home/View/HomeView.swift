@@ -33,6 +33,13 @@ struct HomeView: View {
             }
             .padding([.horizontal, .bottom], Metrics.medium)
         }
+        .onAppear {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            AppDelegate.orientationLock = .portrait
+        }
+        .onDisappear {
+            AppDelegate.orientationLock = .all
+        }
     }
 }
 

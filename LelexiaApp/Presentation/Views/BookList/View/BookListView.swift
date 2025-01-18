@@ -41,6 +41,12 @@ struct BookListView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            AppDelegate.orientationLock = .portrait
+        }
+        .onDisappear {
+            AppDelegate.orientationLock = .all
+        }
     }
 }
 
