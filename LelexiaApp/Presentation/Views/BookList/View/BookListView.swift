@@ -18,10 +18,18 @@ struct BookListView: View {
             Image("book-list-background")
                 .resizable()
                 .ignoresSafeArea(.all)
-            BookListContentView(books: viewModel.books) { id in
-                coordinator.navigate(to: .bookDetail(id: id))
+            switch viewModel.viewState {
+                case .loading:
+                    ProgressView()
+                case .data:
+                    BookListContentView(books: viewModel.books) { id in
+                        coordinator.navigate(to: .bookDetail(id: id))
+                    }
+                        .shadow(color: Color.black.opacity(0.25), radius: 10, x: 0, y: 6)
+                case .error:
+                    ErrorView()
             }
-                .shadow(color: Color.black.opacity(0.25), radius: 10, x: 0, y: 6)
+           
         }
         .task {
             await viewModel.loadBooks()

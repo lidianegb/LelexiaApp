@@ -13,6 +13,7 @@ import SwiftData
 class BookListViewModel {
     
     var books: [Book] = []
+    var viewState: ViewState = .loading
     
     @ObservationIgnored
     private let bookUseCases: BookUseCases
@@ -22,10 +23,13 @@ class BookListViewModel {
     }
 
     func loadBooks() async {
+        viewState = .loading
         do {
             books = try await bookUseCases.fetchBooks()
+            viewState = .data
         } catch {
             print("Error loading books: \(error)")
+            viewState = .error
         }
     }
 }

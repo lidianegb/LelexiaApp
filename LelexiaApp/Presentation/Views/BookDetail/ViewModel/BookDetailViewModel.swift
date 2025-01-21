@@ -21,6 +21,7 @@ class BookDetailViewModel: NSObject {
     var book: Book?
     var pageTextAttributed = AttributedString()
     var readingStatus: ReadingStatus = .stopped
+    var viewState: ViewState = .loading
     var fontSize: CGFloat {
         didSet {
             UserDefaultsManager.shared.saveFontSize(fontSize)
@@ -42,13 +43,16 @@ class BookDetailViewModel: NSObject {
     }
     
     func fetchData() async {
+        viewState = .loading
         do {
             book = try await bookUseCases.fetchBook(from: bookId)
             if let paragraph = book?.getParagraph(by: currentPage)?.paragraph {
                 pageTextAttributed = buildAttributedString(paragraph, raangeOfSpeechString: NSRange())
+                viewState = .data
             }
         } catch {
             print("Error loading books: \(error)")
+            viewState = .error
         }
     }
     
