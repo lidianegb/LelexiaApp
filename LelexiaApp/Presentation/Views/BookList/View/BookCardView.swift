@@ -15,10 +15,10 @@ struct BookCardView: View {
             Color(hex: book.backgroundColor)
             VStack(spacing: .zero) {
                 Text(book.title)
-                    .font(.openDyslexic(size: Metrics.little))
+                    .font(.openDyslexic(size: Metrics.small))
+                    .bold()
                     .foregroundStyle(Color.greenText)
                     .lineLimit(2)
-                    .strokeText(lineWidth: 8)
                     .padding(.horizontal, Metrics.small)
                     .padding(.vertical, Metrics.tiny)
                 Spacer(minLength: Metrics.tiny)
@@ -57,7 +57,7 @@ struct BookCardView: View {
         id: UUID(),
         title: "O coelho e a cenoura",
         cover: "h1-cena1",
-        locked: true,
+        locked: false,
         backgroundColor: "#81B8CD",
         paragraphs: [],
         selectedWords: [])

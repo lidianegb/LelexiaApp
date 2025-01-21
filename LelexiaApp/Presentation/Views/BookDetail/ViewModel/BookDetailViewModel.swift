@@ -21,6 +21,11 @@ class BookDetailViewModel: NSObject {
     var book: Book?
     var pageTextAttributed = AttributedString()
     var readingStatus: ReadingStatus = .stopped
+    var fontSize: CGFloat {
+        didSet {
+            UserDefaultsManager.shared.saveFontSize(fontSize)
+        }
+    }
    
     @ObservationIgnored
     private var currentPage: Int = .zero
@@ -31,6 +36,7 @@ class BookDetailViewModel: NSObject {
     init(bookUseCases: BookUseCases, bookID: UUID) {
         self.bookUseCases = bookUseCases
         self.bookId = bookID
+        fontSize = UserDefaultsManager.shared.loadFontSize()
         super.init()
         self.speechSynthesizer.delegate = self
     }
@@ -52,10 +58,20 @@ class BookDetailViewModel: NSObject {
         currentPage = newPage
     }
     
+    func didChangeFont() {
+        if fontSize < 20 {
+            fontSize += 1
+        } else {
+            fontSize = 16
+        }
+    }
+    
     private func buildAttributedString(_ text: String, raangeOfSpeechString: NSRange) -> AttributedString {
         let nsAttributedString = NSMutableAttributedString(string: text)
         if readingStatus == .playing {
-            nsAttributedString.addAttribute(.backgroundColor, value: UIColor.yellow, range: raangeOfSpeechString)
+            nsAttributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: raangeOfSpeechString)
+            nsAttributedString.addAttribute(.underlineColor, value: UIColor.greenText, range: raangeOfSpeechString)
+
         }
         return AttributedString(nsAttributedString)
     }
@@ -70,9 +86,17 @@ extension BookDetailViewModel: AVSpeechSynthesizerDelegate {
         }
         guard let page = book?.getParagraph(by: currentPage) else { return }
         
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playback, mode: .default, options: .mixWithOthers)
+            try session.setActive(true)
+        } catch {
+            print("Error setting up audio session: \(error)")
+        }
+        
         let utterance = AVSpeechUtterance(string: page.paragraph)
         utterance.voice = AVSpeechSynthesisVoice(language: "pt-BR")
-        utterance.rate = 0.4
+        utterance.rate = 0.3
         speechSynthesizer.speak(utterance)
     }
     

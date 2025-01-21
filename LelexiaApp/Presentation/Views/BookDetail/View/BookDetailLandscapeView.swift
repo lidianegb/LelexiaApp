@@ -9,25 +9,30 @@ import SwiftUI
 
 struct BookDetailLandscapeView: View {
     var image: String?
+    @Binding var fontSize: CGFloat
     @Binding var text: AttributedString
     
     var body: some View {
-        HStack(spacing: Metrics.tiny) {
-            if let image {
-                Image(image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150)
-                    .clipShape(.circle)
-            }
-           // if let text {
+        GeometryReader { geo in
+            HStack(spacing: Metrics.little) {
+                if let image {
+                    Image(image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: geo.size.width / 4)
+                        .clipShape(.circle)
+                }
+                Spacer()
                 Text(text)
-                    .font(.openDyslexic(size: Metrics.small))
-           // }
+                .font(.openDyslexic(size: fontSize))
+                .foregroundStyle(Color.greenText)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(maxHeight: .infinity)
         }
     }
 }
 
 #Preview {
-    BookDetailLandscapeView(image: "h4-cena2", text: .constant(AttributedString("O coelho e a cenoura perdida")))
+    BookDetailLandscapeView(image: "h4-cena2", fontSize: .constant(16), text: .constant(AttributedString("O coelho e a cenoura perdida")))
 }

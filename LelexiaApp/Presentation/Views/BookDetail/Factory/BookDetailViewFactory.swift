@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 enum BookDetailViewFactory {
-    static private let dataSource = SwiftDataBookDataSource.shared
+    static private let dataSource = SwiftDataBookDataSource()
     static private let repository = BookRepositoryImpl(dataSource: dataSource)
     static private let useCases = BookUseCases(repository: repository)
    

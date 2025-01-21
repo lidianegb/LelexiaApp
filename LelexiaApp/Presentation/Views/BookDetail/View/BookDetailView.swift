@@ -36,7 +36,7 @@ struct BookDetailView: View {
                         Spacer()
                         HStack(spacing: Metrics.nano) {
                             RoundedButtonView(image: "font-size") {
-                                // change font size
+                                viewModel.didChangeFont()
                             }
                             RoundedButtonView(image: isReading ? "speaker.wave.2.fill" : "speaker.slash.fill", fromSystem: true) {
                                 
@@ -63,6 +63,7 @@ struct BookDetailView: View {
                                 if let paragraph = book.getParagraph(by: index) {
                                     BookDetailLandscapeView(
                                         image: paragraph.image,
+                                        fontSize: $viewModel.fontSize,
                                         text: $viewModel.pageTextAttributed
                                     )
                                     .tag(index)
@@ -88,8 +89,8 @@ struct BookDetailView: View {
                         HStack {
                             ForEach(0..<book.paragraphs.count, id: \.self) { index in
                                 Circle()
-                                    .fill(index == currentPage ? Color.red : Color.gray)
-                                    .frame(width: 10, height: 10)
+                                    .fill(index == currentPage ? Color.darkGreen : Color.gray)
+                                    .frame(width: Metrics.little, height: Metrics.little)
                                     .animation(.easeInOut, value: currentPage)
                                     .onTapGesture {
                                         currentPage = index
@@ -107,7 +108,8 @@ struct BookDetailView: View {
             AppDelegate.orientationLock = .landscapeRight
         }
         .onDisappear {
-            AppDelegate.orientationLock = .all
+            viewModel.stopReading()
+            AppDelegate.orientationLock = .portrait
         }
         .navigationBarBackButtonHidden(true)
     }

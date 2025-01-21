@@ -14,9 +14,7 @@ class SwiftDataBookDataSource {
     private let container: ModelContainer
     private let context: ModelContext
     
-    static let shared = SwiftDataBookDataSource()
- 
-    private init() {
+    init() {
         self.container = try! ModelContainer(for: BookDataModel.self)
         self.context = container.mainContext
     }
