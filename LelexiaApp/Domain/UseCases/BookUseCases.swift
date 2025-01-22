@@ -27,8 +27,8 @@ struct BookUseCases {
         try await repository.addBook(book)
     }
     
-    func unlockBook(_ book: Book) async throws {
-        try await repository.unlockBook(book)
+    func unlockBook(_ id: UUID) async throws {
+        try await repository.unlockBook(id)
     }
 
     func deleteBook(_ book: Book) async throws {

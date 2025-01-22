@@ -89,6 +89,10 @@ struct BookDetailView: View {
                                                 viewModel.playReading()
                                                 isReading = true
                                             }
+                                            
+                                            if newPage == book.paragraphs.count - 1 {
+                                                viewModel.unlockNextBook()
+                                            }
                                         }
                                         .tabViewStyle(.page(indexDisplayMode: .always))
                                         .indexViewStyle(.page(backgroundDisplayMode: .never))

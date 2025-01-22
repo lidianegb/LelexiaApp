@@ -59,8 +59,8 @@ class NavigationCoordinator: Coordinator {
                 HomeViewFactory.create()
             case .bookList:
                 BookListViewFactory.create()
-            case let .bookDetail(id):
-                BookDetailViewFactory.create(id: id)
+            case let .bookDetail(id, next):
+                BookDetailViewFactory.create(id: id, nextBook: next)
         }
     }
 }

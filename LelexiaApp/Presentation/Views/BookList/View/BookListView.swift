@@ -22,8 +22,8 @@ struct BookListView: View {
                 case .loading:
                     ProgressView()
                 case .data:
-                    BookListContentView(books: viewModel.books) { id in
-                        coordinator.navigate(to: .bookDetail(id: id))
+                    BookListContentView(books: viewModel.books) { (id, next) in
+                        coordinator.navigate(to: .bookDetail(id: id, next: next))
                     }
                         .shadow(color: Color.black.opacity(0.25), radius: 10, x: 0, y: 6)
                 case .error:

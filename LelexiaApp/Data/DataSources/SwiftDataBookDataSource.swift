@@ -68,9 +68,18 @@ class SwiftDataBookDataSource {
         try context.save()
     }
     
-    func unloackBook(_ bookDataModel: BookDataModel) throws {
-        bookDataModel.locked = false
-        try context.save()
+    func unloackBook(_ id: UUID) throws {
+        let descriptor = FetchDescriptor<BookDataModel>(
+            predicate: #Predicate { $0.id == id }
+        )
+        
+        if let bookDataModel = try context.fetch(descriptor).first {
+            if bookDataModel.locked {
+                bookDataModel.locked = false
+                
+                try context.save()
+            }
+        }
     }
     
     func deleteBook(_ bookDataModel: BookDataModel) throws {

@@ -22,6 +22,7 @@ class BookDetailViewModel: NSObject {
     var pageTextAttributed = AttributedString()
     var readingStatus: ReadingStatus = .stopped
     var viewState: ViewState = .loading
+    var nextBookID: UUID?
     var fontSize: CGFloat {
         didSet {
             UserDefaultsManager.shared.saveFontSize(fontSize)
@@ -34,9 +35,10 @@ class BookDetailViewModel: NSObject {
     private let bookId: UUID
     private var speechSynthesizer = AVSpeechSynthesizer()
     
-    init(bookUseCases: BookUseCases, bookID: UUID) {
+    init(bookUseCases: BookUseCases, bookID: UUID, nextBookID: UUID? = nil) {
         self.bookUseCases = bookUseCases
         self.bookId = bookID
+        self.nextBookID = nextBookID
         fontSize = UserDefaultsManager.shared.loadFontSize()
         super.init()
         self.speechSynthesizer.delegate = self
@@ -53,6 +55,13 @@ class BookDetailViewModel: NSObject {
         } catch {
             print("Error loading books: \(error)")
             viewState = .error
+        }
+    }
+    
+    func unlockNextBook() {
+        guard let nextBookID else { return }
+        Task {
+            try await bookUseCases.unlockBook(nextBookID)
         }
     }
     

@@ -10,7 +10,7 @@ import Foundation
 enum Router: Identifiable, Hashable {
     case home
     case bookList
-    case bookDetail(id: UUID)
+    case bookDetail(id: UUID, next: UUID?)
     
     var id: Self { self }
 }

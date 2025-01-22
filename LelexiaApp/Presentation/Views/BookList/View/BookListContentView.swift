@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookListContentView: View {
     var books: [Book]
-    var action: ((UUID) -> Void)?
+    var action: ((UUID, UUID?) -> Void)?
     
     private let columns = Array(repeating: GridItem(.flexible(), spacing: Metrics.small, alignment: .center), count: 2)
     
@@ -18,12 +18,13 @@ struct BookListContentView: View {
             VStack {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: Metrics.small) {
-                        ForEach(books) { book in
-                            BookCardView(book: book)
+                        ForEach(0..<books.count, id: \.self) { index in
+                            BookCardView(book: books[index])
                                 .frame(height: (geometry.size.width / 2) * 1.3)
                                 .onTapGesture {
-                                    if book.locked { return }
-                                    action?(book.id)
+                                    if books[index].locked { return }
+                                    let nextBook = index == books.count - 1 ? nil : books[index + 1].id
+                                    action?(books[index].id, nextBook)
                                 }
                         }
                     }
