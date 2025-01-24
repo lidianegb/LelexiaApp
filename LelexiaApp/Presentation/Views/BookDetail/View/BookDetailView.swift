@@ -44,7 +44,7 @@ struct BookDetailView: View {
                                     }
                                     RoundedButtonView(image: isReading ? "speaker.wave.2.fill" : "speaker.slash.fill", fromSystem: true) {
                                         
-                                        switch viewModel.readingStatus {
+                                        switch viewModel.speechManager.readingStatus {
                                             case .playing:
                                                 Task {
                                                     viewModel.pauseReading()
@@ -56,7 +56,7 @@ struct BookDetailView: View {
                                         }
                                         isReading.toggle()
                                         continueReading = isReading
-                                        viewModel.readingStatus = isReading ? .playing : .paused
+                                        viewModel.speechManager.readingStatus = isReading ? .playing : .paused
                                     }
                                 }
                             } .frame(maxWidth: .infinity)

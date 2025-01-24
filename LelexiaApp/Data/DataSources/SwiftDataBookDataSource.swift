@@ -53,12 +53,8 @@ class SwiftDataBookDataSource {
     }
     
     func getBooksFromLocal() -> [BookDataModel] {
-        guard let url = Bundle.main.url(forResource: "list_story", withExtension: "json"),
-              let data = try? Data(contentsOf: url) else { return [] }
-        let decoder = JSONDecoder()
-          
-        if let decodedData = try? decoder.decode([DecodableBook].self, from: data) {
-            return decodedData.map { BookDataModel(from: $0 )}
+        if let decodableBooks = JSONLoader.load([DecodableBook].self, fromFile: "list_story") {
+            return decodableBooks.map { BookDataModel(from: $0 )}
         }
         return []
     }

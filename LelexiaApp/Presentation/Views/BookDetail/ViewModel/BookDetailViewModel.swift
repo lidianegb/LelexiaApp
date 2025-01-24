@@ -9,18 +9,11 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-enum ReadingStatus {
-    case playing
-    case paused
-    case stopped
-}
-
 @Observable
 @MainActor
 class BookDetailViewModel: NSObject {
     var book: Book?
     var pageTextAttributed = AttributedString()
-    var readingStatus: ReadingStatus = .stopped
     var viewState: ViewState = .loading
     var nextBookID: UUID?
     var fontSize: CGFloat {
@@ -28,12 +21,11 @@ class BookDetailViewModel: NSObject {
             UserDefaultsManager.shared.saveFontSize(fontSize)
         }
     }
-   
+    let speechManager = SpeechManager()
     @ObservationIgnored
     private var currentPage: Int = .zero
     private let bookUseCases: BookUseCases
     private let bookId: UUID
-    private var speechSynthesizer = AVSpeechSynthesizer()
     
     init(bookUseCases: BookUseCases, bookID: UUID, nextBookID: UUID? = nil) {
         self.bookUseCases = bookUseCases
@@ -41,7 +33,6 @@ class BookDetailViewModel: NSObject {
         self.nextBookID = nextBookID
         fontSize = UserDefaultsManager.shared.loadFontSize()
         super.init()
-        self.speechSynthesizer.delegate = self
     }
     
     func fetchData() async {
@@ -81,7 +72,7 @@ class BookDetailViewModel: NSObject {
     
     private func buildAttributedString(_ text: String, raangeOfSpeechString: NSRange) -> AttributedString {
         let nsAttributedString = NSMutableAttributedString(string: text)
-        if readingStatus == .playing {
+        if speechManager.readingStatus == .playing {
             nsAttributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: raangeOfSpeechString)
             nsAttributedString.addAttribute(.underlineColor, value: UIColor.greenText, range: raangeOfSpeechString)
 
@@ -90,57 +81,23 @@ class BookDetailViewModel: NSObject {
     }
 }
 
-extension BookDetailViewModel: AVSpeechSynthesizerDelegate {
+// MARK: AVSpeechManager
+
+extension BookDetailViewModel {
     func playReading() {
-        readingStatus = .playing
-        if speechSynthesizer.isPaused {
-            speechSynthesizer.continueSpeaking()
-            return
-        }
         guard let page = book?.getParagraph(by: currentPage) else { return }
         
-        do {
-            let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playback, mode: .default, options: .mixWithOthers)
-            try session.setActive(true)
-        } catch {
-            print("Error setting up audio session: \(error)")
+        speechManager.play(text: page.paragraph) { [weak self] range in
+            guard let self else { return }
+            self.pageTextAttributed = self.buildAttributedString(page.paragraph, raangeOfSpeechString: range)
         }
-        
-        let utterance = AVSpeechUtterance(string: page.paragraph)
-        utterance.voice = AVSpeechSynthesisVoice(language: "pt-BR")
-        utterance.rate = 0.3
-        speechSynthesizer.speak(utterance)
     }
     
     func pauseReading() {
-        if speechSynthesizer.isSpeaking {
-            speechSynthesizer.pauseSpeaking(at: .word)
-            readingStatus = .paused
-        }
+        speechManager.pause()
     }
     
     func stopReading() {
-        speechSynthesizer.stopSpeaking(at: .immediate)
-        readingStatus = .stopped
-    }
-
-    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let self, let page = book?.getParagraph(by: currentPage) else { return }
-            self.pageTextAttributed = buildAttributedString(page.paragraph, raangeOfSpeechString: characterRange)
-        }
-    }
-    
-    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
-        DispatchQueue.main.async {
-            self.readingStatus = .paused
-        }
-    }
-    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
-        DispatchQueue.main.async {
-            self.readingStatus = .playing
-        }
+        speechManager.stop()
     }
 }
