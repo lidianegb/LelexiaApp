@@ -94,7 +94,7 @@ struct BookDetailView: View {
                                                 viewModel.unlockNextBook()
                                             }
                                         }
-                                        .tabViewStyle(.page(indexDisplayMode: .always))
+                                        .tabViewStyle(.page(indexDisplayMode: .never))
                                         .indexViewStyle(.page(backgroundDisplayMode: .never))
                                         .frame(maxWidth: .infinity)
                                         

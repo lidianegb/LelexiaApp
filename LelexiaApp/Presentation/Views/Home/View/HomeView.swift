@@ -27,7 +27,7 @@ struct HomeView: View {
                         // go to words game
                     }
                     CardButtonView(image: "memoryGame") {
-                        // go to memory game
+                        coordinator.navigate(to: .memoryGame)
                     }
                 }
             }

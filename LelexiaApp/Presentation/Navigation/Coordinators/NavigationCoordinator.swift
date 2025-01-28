@@ -61,6 +61,10 @@ class NavigationCoordinator: Coordinator {
                 BookListViewFactory.create()
             case let .bookDetail(id, next):
                 BookDetailViewFactory.create(id: id, nextBook: next)
+            case .memoryGame:
+                MemoryGameViewFactory.create()
+            case .alphabetView(letters: let letters):
+                AlphabetView(alphabetLetters: letters)
         }
     }
 }

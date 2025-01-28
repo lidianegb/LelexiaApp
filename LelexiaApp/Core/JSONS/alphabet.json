@@ -1,0 +1,154 @@
+{
+    "alfabeto": [
+        {
+            "letra": "a",
+            "contador": 0
+        },
+        {
+            "letra": "b",
+            "contador": 0
+        },
+        {
+            "letra": "c",
+            "contador": 0
+        },
+        {
+            "letra": "d",
+            "contador": 0
+        },
+        {
+            "letra": "e",
+            "contador": 0
+        },
+        {
+            "letra": "f",
+            "contador": 0
+        },
+        {
+            "letra": "g",
+            "contador": 0
+        },
+        {
+            "letra": "h",
+            "contador": 0
+        },
+        {
+            "letra": "i",
+            "contador": 0
+        },
+        {
+            "letra": "j",
+            "contador": 0
+        },
+        {
+            "letra": "k",
+            "contador": 0
+        },
+        {
+            "letra": "l",
+            "contador": 0
+        },
+        {
+            "letra": "m",
+            "contador": 0
+        },
+        {
+            "letra": "n",
+            "contador": 0
+        },
+        {
+            "letra": "o",
+            "contador": 0
+        },
+        {
+            "letra": "p",
+            "contador": 0
+        },
+        {
+            "letra": "q",
+            "contador": 0
+        },
+        {
+            "letra": "r",
+            "contador": 0
+        },
+        {
+            "letra": "s",
+            "contador": 0
+        },
+        {
+            "letra": "t",
+            "contador": 0
+        },
+        {
+            "letra": "u",
+            "contador": 0
+        },
+        {
+            "letra": "v",
+            "contador": 0
+        },
+        {
+            "letra": "w",
+            "contador": 0
+        },
+        {
+            "letra": "x",
+            "contador": 0
+        },
+        {
+            "letra": "y",
+            "contador": 0
+        },
+        {
+            "letra": "z",
+            "contador": 0
+        }
+    ],
+    "grupos": [
+        {
+            "letras": ["b", "d", "p", "q"],
+            "contador": 0
+        },
+        {
+            "letras": ["m", "n", "u", "w"],
+            "contador": 0
+        },
+        {
+            "letras": ["v", "u", "y"],
+            "contador": 0
+        },
+        {
+            "letras": ["c", "s"],
+            "contador": 0
+        },
+        {
+            "letras": ["f", "v"],
+            "contador": 0
+        },
+        {
+            "letras": ["g", "j"],
+            "contador": 0
+        },
+        {
+            "letras": ["t", "d"],
+            "contador": 0
+        },
+        {
+            "letras": ["a", "o"],
+            "contador": 0
+        },
+        {
+            "letras": ["j", "l"],
+            "contador": 0
+        },
+        {
+            "letras": ["j", "l"],
+            "contador": 0
+        },
+        {
+            "letras": ["r", "n"],
+            "contador": 0
+        }
+    ]
+}
