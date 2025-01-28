@@ -35,6 +35,6 @@ class BookRepositoryImpl: BookRepository {
     }
     
     func unlockBook(_ id: UUID) async throws {
-        try await dataSource.unloackBook(id)
+        try await dataSource.unlockBook(id)
     }
 }

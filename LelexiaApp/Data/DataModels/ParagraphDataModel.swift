@@ -10,7 +10,6 @@ import SwiftData
 
 @Model
 class ParagraphDataModel {
-    
     @Attribute(.unique) var id: UUID
     var paragraph: String
     var index: Int

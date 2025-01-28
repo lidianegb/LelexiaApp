@@ -11,12 +11,10 @@ import SwiftUI
 
 @MainActor
 class SwiftDataBookDataSource {
-    private let container: ModelContainer
     private let context: ModelContext
     
     init() {
-        self.container = try! ModelContainer(for: BookDataModel.self)
-        self.context = container.mainContext
+        self.context = PersistenceContainer.shared.mainContext
     }
 
     func getBooks() async throws -> [BookDataModel] {
@@ -30,7 +28,7 @@ class SwiftDataBookDataSource {
                     do {
                         try addBook($0)
                     } catch {
-                        
+                        print("Error saving book: \($0.title)")
                     }
                 }
                 return localBooks
@@ -64,7 +62,7 @@ class SwiftDataBookDataSource {
         try context.save()
     }
     
-    func unloackBook(_ id: UUID) throws {
+    func unlockBook(_ id: UUID) throws {
         let descriptor = FetchDescriptor<BookDataModel>(
             predicate: #Predicate { $0.id == id }
         )

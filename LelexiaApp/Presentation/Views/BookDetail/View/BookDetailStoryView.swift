@@ -1,5 +1,5 @@
 //
-//  BookDetailLandscapeView.swift
+//  BookDetailStoryView.swift
 //  LelexiaApp
 //
 //  Created by Lidiane Gomes Barbosa on 15/01/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BookDetailLandscapeView: View {
+struct BookDetailStoryView: View {
     var image: String?
     @Binding var fontSize: CGFloat
     @Binding var text: AttributedString
@@ -34,5 +34,9 @@ struct BookDetailLandscapeView: View {
 }
 
 #Preview {
-    BookDetailLandscapeView(image: "h4-cena2", fontSize: .constant(16), text: .constant(AttributedString("O coelho e a cenoura perdida")))
+    BookDetailStoryView(
+        image: "h4-cena2",
+        fontSize: .constant(16),
+        text: .constant(AttributedString("O coelho e a cenoura perdida"))
+    )
 }

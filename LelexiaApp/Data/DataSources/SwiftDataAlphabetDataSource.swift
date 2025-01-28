@@ -11,20 +11,18 @@ import SwiftUI
 
 @MainActor
 class SwiftDataAlphabetDataSource {
-    private let container: ModelContainer
     private let context: ModelContext
     
     init() {
-        self.container = try! ModelContainer(for: AlphabetDataModel.self)
-        self.context = container.mainContext
+        self.context = PersistenceContainer.shared.mainContext
     }
 
     func getAlphabet() async throws -> AlphabetDataModel? {
         do {
             let descriptor = FetchDescriptor<AlphabetDataModel>()
-            let dataModels = try context.fetch(descriptor)
+            let dataModel = try context.fetch(descriptor).first
             
-            if dataModels.isEmpty {
+            if dataModel == nil {
                 let localData = getAlphabetFromLocal()
                 do {
                     try saveAlphabet(localData)
@@ -32,13 +30,12 @@ class SwiftDataAlphabetDataSource {
                     print("Error saving alphabet: \(error)")
                 }
                 return localData
-            } else {
-                return dataModels.first
             }
+            return dataModel
            
         } catch {
             print("Error loading alphabet: \(error)")
-            return getAlphabetFromLocal()
+            return nil
         }
     }
     
